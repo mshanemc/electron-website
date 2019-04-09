@@ -11,8 +11,12 @@
     "test": "node test.js"
   },
   "dependencies": {
+    "cookie-parser": "^1.4.3",
     "ejs": "^2.5.6",
-    "express": "^4.15.2"
+    "express": "^4.15.2",
+    "path": "^0.12.7",
+    "pg": "^7.4.3",
+    "uuid": "^3.2.1"
   },
   "devDependencies": {
     "request": "^2.81.0",

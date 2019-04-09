@@ -1,0 +1,46 @@
+<footer class="text-center">
+    <ul class="list-inline">
+        <li class="list-inline-item">
+            <a href="javascript:void(0)">Electron Motors</a>
+        </li>
+        <li class="list-inline-item">
+            <a href="javascript:void(0)">Privacy &amp; Legal</a>
+        </li>
+        <li class="list-inline-item">
+            <a href="javascript:void(0)">Contact</a>
+        </li>
+        <li class="list-inline-item">
+            <a href="javascript:void(0)">Careers</a>
+        </li>
+        <li class="list-inline-item">
+            <a href="javascript:void(0)">Newsletter</a>
+        </li>
+        <li class="list-inline-item">
+            <a href="javascript:void(0)">Forums</a>
+        </li>
+        <li class="list-inline-item">
+            <a href="javascript:void(0)">Locations</a>
+        </li>
+    </ul>
+</footer>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jsforce/1.7.0/jsforce.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<script>
+    var vehicle = {};
+    <% Object.keys(vehicle).forEach(function (key) { %>
+        vehicle['<%= key %>'] = '<%= vehicle[key] %>';
+            <% }); %>
+</script>
+<script>
+        var account = {};
+        <% Object.keys(account).forEach(function (key) { %>
+        account['<%= key %>'] = '<%= account[key] %>';
+        <% }); %>
+</script>
+
+<script src="/javascript/script.js"></script>

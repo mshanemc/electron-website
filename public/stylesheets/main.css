@@ -1,27 +1,77 @@
-.jumbotron {
-  background: #532F8C;
-  color: white;
-  padding-bottom: 80px; }
-  .jumbotron .btn-primary {
-    background: #845ac7;
-    border-color: #845ac7; }
-    .jumbotron .btn-primary:hover {
-      background: #7646c1; }
-  .jumbotron p {
-    color: #d9ccee;
-    max-width: 75%;
-    margin: 1em auto 2em; }
-  .navbar + .jumbotron {
-    margin-top: -20px; }
-  .jumbotron .lang-logo {
-    display: block;
-    background: #B01302;
-    border-radius: 50%;
-    overflow: hidden;
-    width: 100px;
-    height: 100px;
-    margin: auto;
-    border: 2px solid white; }
-    .jumbotron .lang-logo img {
-      max-width: 100%; }
+html,
+body {
+    height: 100%;
+}
 
+body {
+    background-image: linear-gradient(#999, #fff);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: "Open Sans", sans-serif;
+    position: relative;
+}
+
+nav {
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 300;
+    cursor: pointer;
+    transition: color 0.15s ease-in-out;
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+    padding: 0.5rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    line-height: 30px;
+}
+
+nav .col {
+    line-height: 2rem;
+}
+
+nav a {
+    color: white;
+}
+
+nav a:hover {
+    color: white;
+}
+
+nav .logo img {
+    height: 30px;
+}
+
+nav .models span {
+    display: inline-block;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    font-size: 0.9rem;
+}
+
+footer ul li {
+    margin-right: 0 !important;
+}
+
+footer ul li:after {
+    content: "\00a0";
+    padding: 10px;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAOwAAADsABataJCQAAABl0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMC4xMkMEa+wAAAAnSURBVBhXY/Dz89MA4sNA/B9Ka4AEYQIwfBgkiCwAxjhVopnppwEApxQqhnyQ+VkAAAAASUVORK5CYII=)
+        center center no-repeat;
+}
+
+footer ul li:last-child:after {
+    content: none;
+}
+
+footer a {
+    color: #a7a7a9;
+}

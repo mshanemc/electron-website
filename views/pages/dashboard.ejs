@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Electron Motors</title>
+    <% include ../partials/header.ejs %>
+</head>
+
+<body class="dashboard">
+    <div id="app" class="page-wrapper">
+        <div>
+            <% include ../partials/nav.ejs %>
+        </div>
+        <div class="content-wrapper">
+            <div class="row">
+                <div class="col-4">
+                    <div class="card">
+                        <h2>Owners Portal</h2>
+                        <h3>Your {{ vehicle.model__c }}</h3>
+                        <div class="detailRow">
+                            <label>Model</label>
+                            <div>{{ vehicle.model__c }}</div>
+                        </div>
+                        <div class="detailRow">
+                            <label>Year</label>
+                            <div>{{ vehicle.year__c }}</div>
+                        </div>
+                        <div class="detailRow">
+                            <label>Battery</label>
+                            <div>{{ vehicle.battery__c }}</div>
+                        </div>
+                        <h3>Primary Driver</h3>
+                        <div class="detailRow">
+                            <label>First Name</label>
+                            <div>{{ account.firstname }}</div>
+                        </div>
+                        <div class="detailRow">
+                            <label>Last Name</label>
+                            <div>{{ account.lastname }}</div>
+                        </div>
+                        <div class="detailRow">
+                            <label>Email Address</label>
+                            <div>{{ account.email }}</div>
+                        </div>
+                        <div class="detailRow">
+                            <label>Username</label>
+                            <div>{{ username }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-8 text-center">
+                    <div class="card">
+                        <div id="car-wrapper">
+                            <img id="car-photo" v-bind:src="'/images/' + vehicle.model__c.toLowerCase() + '.png'" v-bind:style="{'-webkit-filter': 'hue-rotate(' + vehicle.paint__c + 'deg)'}" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <div class="card text-center">
+                        <div class="flex-wrapper">
+                            <div class="single-chart">
+                                <svg viewbox="0 0 36 36" class="circular-chart green">
+                                    <path class="circle-bg" d="M18 2.0845
+                                        a 15.9155 15.9155 0 0 1 0 31.831
+                                        a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                    <path class="circle" stroke-dasharray="100, 100" d="M18 2.0845
+                                        a 15.9155 15.9155 0 0 1 0 31.831
+                                        a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                    <text x="18" y="20.35" class="percentage">978</text>
+                                    <text x="18" y="24.35" class="percentageLabel">miles</text>
+                                </svg>
+                            </div>
+                        </div>
+                        <div>Total Miles Driven</div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card text-center">
+                        <div class="flex-wrapper">
+                            <div class="single-chart">
+                                <svg viewbox="0 0 36 36" class="circular-chart orange">
+                                    <path class="circle-bg" d="M18 2.0845
+                                                a 15.9155 15.9155 0 0 1 0 31.831
+                                                a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                    <path class="circle" stroke-dasharray="72, 100" d="M18 2.0845
+                                                a 15.9155 15.9155 0 0 1 0 31.831
+                                                a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                    <text x="18" y="20.35" class="percentage">72%</text>
+                                </svg>
+                            </div>
+                        </div>
+                        <div>Current Battery Charge</div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card text-center">
+                        <div class="flex-wrapper">
+                            <div class="single-chart">
+                                <svg viewbox="0 0 36 36" class="circular-chart green">
+                                    <path class="circle-bg" d="M18 2.0845
+                                                a 15.9155 15.9155 0 0 1 0 31.831
+                                                a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                    <path class="circle" stroke-dasharray="100, 100" d="M18 2.0845
+                                                a 15.9155 15.9155 0 0 1 0 31.831
+                                                a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                    <text x="18" y="20.35" class="percentage">213</text>
+                                    <text x="18" y="24.35" class="percentageLabel">miles</text>
+                                </svg>
+                            </div>
+                        </div>
+                        <div>Estimated Range</div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="card text-center">
+                        <div class="flex-wrapper">
+                            <div class="single-chart">
+                                <svg viewbox="0 0 36 36" class="circular-chart green">
+                                    <path class="circle-bg" d="M18 2.0845
+                                            a 15.9155 15.9155 0 0 1 0 31.831
+                                            a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                    <path class="circle" stroke-dasharray="100, 100" d="M18 2.0845
+                                            a 15.9155 15.9155 0 0 1 0 31.831
+                                            a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                    <text x="18" y="20.35" class="percentage">0</text>
+                                    <text x="18" y="24.35" class="percentageLabel">tickets</text>
+                                </svg>
+                            </div>
+                        </div>
+                        <div>Number of open service tickets</div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card text-center">
+                        <div class="flex-wrapper">
+                            <div class="single-chart">
+                                <svg viewbox="0 0 36 36" class="circular-chart green">
+                                    <path class="circle-bg" d="M18 2.0845
+                                                    a 15.9155 15.9155 0 0 1 0 31.831
+                                                    a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                    <path class="circle" stroke-dasharray="82, 100" d="M18 2.0845
+                                                    a 15.9155 15.9155 0 0 1 0 31.831
+                                                    a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                    <text x="18" y="20.35" class="percentage">86%</text>
+                                </svg>
+                            </div>
+                        </div>
+                        <div>Charging Efficiency</div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card text-center">
+                        <div class="flex-wrapper">
+                            <div class="single-chart">
+                                <svg viewbox="0 0 36 36" class="circular-chart red">
+                                    <path class="circle-bg" d="M18 2.0845
+                                                    a 15.9155 15.9155 0 0 1 0 31.831
+                                                    a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                    <path class="circle" stroke-dasharray="28, 100" d="M18 2.0845
+                                                    a 15.9155 15.9155 0 0 1 0 31.831
+                                                    a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                    <text x="18" y="20.35" class="percentage">12</text>
+                                    <text x="18" y="24.35" class="percentageLabel">days</text>
+                                </svg>
+                            </div>
+                        </div>
+                        <div>Days until service checkup</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <% include ../partials/login.ejs %>
+        </div>
+    </div>
+
+    <div>
+        <% include ../partials/footer.ejs %>
+    </div>
+</body>
+
+</html>

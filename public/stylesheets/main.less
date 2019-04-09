@@ -1,0 +1,502 @@
+html,
+body {
+    height: 100%;
+}
+
+body {
+    font-family: "Open Sans", sans-serif;
+    position: relative;
+
+    .page-wrapper {
+        min-height: 100%;
+        padding-bottom: 2rem;
+        margin-bottom: -50px;
+    }
+
+    .page-wrapper:after {
+        content: "";
+        display: block;
+    }
+
+    #car-photo {
+        width: 100%;
+        max-width: 800px;
+    }
+
+    .content-wrapper {
+        max-width: 1000px;
+        margin: 0 auto;
+        position: relative;
+        padding-top: 2rem;
+
+        .card {
+            border: 1px solid rgb(204, 204, 204);
+            background-color: rgb(247, 247, 247);
+            padding: 1.1rem;
+            margin: 0.4rem;
+            height: 100%;
+
+            h3 {
+                font-size: 1.4rem;
+                padding-bottom: 0.5rem;
+            }
+
+            .numberCircle {
+                width: 120px;
+                line-height: 120px;
+                border-radius: 50%;
+                text-align: center;
+                font-size: 32px;
+                border: 3px solid #888;
+                margin: auto;
+            }
+        }
+    }
+    nav {
+        color: white;
+        font-size: 0.8rem;
+        font-weight: 300;
+        cursor: pointer;
+        transition: color 0.15s ease-in-out;
+        text-transform: uppercase;
+        letter-spacing: 0.2rem;
+        padding: 0.5rem;
+        padding-left: 3rem;
+        padding-right: 3rem;
+        line-height: 30px;
+
+        .col {
+            line-height: 2rem;
+        }
+
+        a {
+            color: white;
+        }
+
+        a:hover {
+            color: white;
+        }
+
+        .logo img {
+            height: 30px;
+        }
+
+        .models span {
+            display: inline-block;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+    }
+
+    footer {
+        width: 100%;
+        font-size: 0.9rem;
+
+        ul {
+            padding: 0;
+            margin: 0;
+            padding-top: 15px;
+        }
+
+        ul li {
+            margin-right: 0 !important;
+        }
+
+        ul li:after {
+            content: "\00a0";
+            padding: 10px;
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAOwAAADsABataJCQAAABl0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMC4xMkMEa+wAAAAnSURBVBhXY/Dz89MA4sNA/B9Ka4AEYQIwfBgkiCwAxjhVopnppwEApxQqhnyQ+VkAAAAASUVORK5CYII=)
+                center center no-repeat;
+        }
+
+        ul li:last-child:after {
+            content: none;
+        }
+
+        a {
+            color: #a7a7a9;
+        }
+    }
+
+    footer,
+    .page-wrapper:after {
+        height: 50px;
+    }
+}
+
+body.home {
+    background-image: linear-gradient(#999, #fff);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    .main {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        h1 {
+            color: white;
+            font-size: 3.5rem;
+            font-weight: 300;
+            padding-bottom: 1rem;
+        }
+
+        .actions {
+            padding-bottom: 2.8rem;
+        }
+
+        .actions button {
+            font-weight: 300;
+            font-size: 0.8rem;
+            letter-spacing: 0.1rem;
+            padding: 0.5rem;
+            padding-left: 3rem;
+            padding-right: 3rem;
+            background-color: rgb(51, 51, 51);
+            text-transform: uppercase;
+            color: white;
+        }
+
+        .actions button.primary {
+            background-color: rgb(87, 132, 171);
+        }
+
+        #car-wrapper {
+            position: relative;
+            animation-name: driveIn;
+            animation-duration: 1s;
+        }
+
+        .customization {
+            padding-top: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1rem;
+        }
+    }
+}
+
+body.custom {
+    nav {
+        background-color: #222;
+    }
+
+    .backdrop {
+        min-height: 450px;
+        background-image: linear-gradient(#fff, #777);
+        background-size: cover;
+        background-position: bottom;
+        background-repeat: no-repeat;
+        background-image: url("../images/backdrop2.png");
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+
+    #car-wrapper {
+        position: relative;
+        animation-duration: 1s;
+
+        #car-photo {
+            padding-top: 140px;
+            max-width: 800px;
+        }
+    }
+
+    .content-wrapper {
+        .detail-wrapper {
+            .selected {
+                -moz-box-shadow: inset 0 0 0 4px #0090ff;
+                -webkit-box-shadow: inset 0 0 0 4px #0090ff;
+                box-shadow: inset 0 0 0 4px #0090ff;
+            }
+
+            .edition-wrapper {
+                .card {
+                    cursor: pointer;
+                }
+            }
+
+            .color {
+                width: 50px;
+                height: 50px;
+                border: 1px solid rgb(204, 204, 204);
+            }
+
+            .red {
+                background-image: linear-gradient(#550000, #ff0000, #550000);
+            }
+
+            .blue {
+                background-image: linear-gradient(#000055, #0000ff, #000055);
+            }
+
+            .green {
+                background-image: linear-gradient(#005500, #00aa00, #005500);
+            }
+
+            .purple {
+                background-image: linear-gradient(#4b0082, #8a2be2, #4b0082);
+            }
+
+            .teal {
+                background-image: linear-gradient(#004d4d, #00b3b3, #004d4d);
+            }
+
+            .brown {
+                background-image: linear-gradient(#5d2a00, #e0d3a7, #5d2a00);
+            }
+        }
+
+        .buy-wrapper {
+            .card {
+                position: absolute;
+                top: 0;
+                right: 0;
+                left: 0;
+                bottom: 0;
+                background-color: rgb(44, 44, 44) !important;
+                padding: 0 !important;
+                color: white;
+
+                #cash {
+                    h2 {
+                        padding-top: 0.5rem;
+                        padding-bottom: 1.1rem;
+                        margin-bottom: 1.3rem;
+                        border-bottom: 1px rgb(77, 77, 77) solid;
+                    }
+                    h3 {
+                        padding: 0;
+                        margin: 0;
+                    }
+                    p {
+                        padding-bottom: 1.2rem;
+                        margin: 0;
+                    }
+                }
+
+                #purchase {
+                    h2 {
+                        padding-top: 0.7rem;
+                        padding-bottom: 1.5rem;
+                        margin-bottom: 1.5rem;
+                        border-bottom: 1px #4d4d4d solid;
+                        font-size: 1.6rem;
+                    }
+                    h3 {
+                        font-size: 1.2rem;
+                        line-height: 1.4;
+                    }
+                }
+
+                .row {
+                    margin: 0 !important;
+
+                    .col {
+                        padding: 0 !important;
+                        margin: 0 !important;
+                    }
+                }
+
+                button {
+                    background-color: rgb(70, 70, 70);
+                    border: none;
+                    color: white;
+                    padding: 0.8rem;
+                    margin: 0;
+                    width: 100%;
+                    display: block;
+                }
+
+                .selected {
+                    background-color: inherit;
+                }
+
+                .tabcontent {
+                    padding: 1rem;
+                    text-align: center;
+                }
+
+                .bottom-wrapper {
+                    position: absolute;
+                    right: 0;
+                    bottom: 0;
+                    left: 0;
+
+                    .delivery {
+                        background-color: black;
+                        padding: 1.5rem;
+                        text-align: center;
+                        padding: 0.8rem;
+                    }
+
+                    .actions button {
+                        background-color: #666;
+                    }
+
+                    .actions button.primary {
+                        background-color: #c00;
+                    }
+                }
+            }
+        }
+    }
+
+    footer {
+        background-color: #222;
+        color: white;
+    }
+}
+
+body.dashboard {
+    background-image: linear-gradient(#999, #fff);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    nav {
+        background-color: #222;
+    }
+
+    .content-wrapper {
+        padding-left: 3rem;
+        padding-right: 3rem;
+        max-width: inherit;
+        padding-top: 1.5rem;
+    }
+
+    .card {
+        margin: 0;
+
+        #car-wrapper {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+        }
+
+        h2 {
+            padding: 0;
+            margin: 0;
+            padding-bottom: 0.7rem;
+            margin-bottom: 0.4rem;
+            text-transform: uppercase;
+            letter-spacing: 0.4rem;
+            font-size: 1.4rem;
+            font-weight: 300;
+            border-bottom: 1px #999999 solid;
+        }
+        h3 {
+            margin-top: 1.3rem;
+            margin-bottom: 0.3rem;
+            font-size: 1.3rem;
+            font-weight: bolder;
+            text-transform: uppercase;
+            letter-spacing: 0.15rem;
+            font-size: 1rem;
+        }
+        .detailRow {
+            line-height: 1.4;
+            color: #999999;
+            label {
+                float: left;
+                width: 120px;
+            }
+        }
+    }
+
+    .col,
+    .col-4,
+    .col-8 {
+        padding: 0.5rem !important;
+    }
+
+    @keyframes driveOff {
+        from {
+            left: 0;
+        }
+        to {
+            left: -4000px;
+        }
+    }
+
+    @keyframes driveIn {
+        from {
+            left: +4000px;
+        }
+        to {
+            left: 0;
+        }
+    }
+
+    .flex-wrapper {
+        display: flex;
+        flex-flow: row nowrap;
+    }
+
+    .single-chart {
+        width: 100%;
+        justify-content: space-around;
+    }
+
+    .circular-chart {
+        display: block;
+        margin: 10px auto;
+        max-width: 80%;
+        max-height: 200px;
+    }
+
+    .circle-bg {
+        fill: none;
+        stroke: #eee;
+        stroke-width: 3.8;
+    }
+
+    .circle {
+        fill: none;
+        stroke-width: 2.8;
+        stroke-linecap: round;
+        animation: progress 1s ease-out forwards;
+    }
+
+    @keyframes progress {
+        0% {
+            stroke-dasharray: 0 100;
+        }
+    }
+
+    .circular-chart.orange .circle {
+        stroke: #ff9f00;
+    }
+
+    .circular-chart.green .circle {
+        stroke: #4cc790;
+    }
+
+    .circular-chart.red .circle {
+        stroke: #bb3c3c;
+    }
+
+    .percentage {
+        fill: #666;
+        font-family: sans-serif;
+        font-size: 0.5em;
+        text-anchor: middle;
+    }
+
+    .percentageLabel {
+        fill: #666;
+        font-family: sans-serif;
+        font-size: 0.2em;
+        text-anchor: middle;
+    }
+
+    footer {
+        background-color: #222;
+        color: white;
+    }
+}
