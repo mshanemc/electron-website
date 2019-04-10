@@ -14,7 +14,7 @@ express()
     .use(cookieParser())
     .set("views", path.join(__dirname, "views"))
     .set("view engine", "ejs")
-    .get("/", function(request, response) {
+    .get("/", function (request, response) {
         var username = request.cookies.username;
         db.getAccountAndVehicleByUsername(username, data => {
             response.render("pages/index", {
@@ -23,7 +23,25 @@ express()
             });
         });
     })
-    .get("/customize", function(request, response) {
+    .get("/announce", function (request, response) {
+        var username = request.cookies.username;
+        db.getAccountAndVehicleByUsername(username, data => {
+            response.render("pages/announce", {
+                account: data.account,
+                vehicle: data.vehicle
+            });
+        });
+    })
+    .get("/order", function (request, response) {
+        var username = request.cookies.username;
+        db.getAccountAndVehicleByUsername(username, data => {
+            response.render("pages/order", {
+                account: data.account,
+                vehicle: data.vehicle
+            });
+        });
+    })
+    .get("/customize", function (request, response) {
         var username = request.cookies.username;
         db.getAccountAndVehicleByUsername(username, data => {
             response.render("pages/customize", {
@@ -32,7 +50,7 @@ express()
             });
         });
     })
-    .get("/dashboard", function(request, response) {
+    .get("/dashboard", function (request, response) {
         var username = request.cookies.username;
         db.getAccountAndVehicleByUsername(username, data => {
             response.render("pages/dashboard", {
@@ -41,28 +59,28 @@ express()
             });
         });
     })
-    .get("/api/account", function(req, res) {
+    .get("/api/account", function (req, res) {
         var username = req.query.username;
-        db.getAccountByUsername(username, function(account) {
+        db.getAccountByUsername(username, function (account) {
             res.setHeader("Content-Type", "application/json");
             res.send(JSON.stringify(account, null, 3));
         });
     })
-    .get("/api/vehicle", function(req, res) {
+    .get("/api/vehicle", function (req, res) {
         var username = req.query.username;
-        db.getVehicleByUsername(username, function(vehicle) {
+        db.getVehicleByUsername(username, function (vehicle) {
             res.setHeader("Content-Type", "application/json");
             res.send(JSON.stringify(vehicle, null, 3));
         });
     })
-    .post("/api/vehicle", function(req, res) {
+    .post("/api/vehicle", function (req, res) {
         var vehicle = req.body;
-        db.updateVehicle(vehicle, function(updatedVehicle) {
+        db.updateVehicle(vehicle, function (updatedVehicle) {
             res.setHeader("Content-Type", "application/json");
             res.send(JSON.stringify(updatedVehicle, null, 3));
         });
     })
-    .post("/api/pricequote", function(req, res) {
+    .post("/api/pricequote", function (req, res) {
         var vehicle = req.body;
         var data = db.getPrice(vehicle);
         res.setHeader("Content-Type", "application/json");
