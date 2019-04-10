@@ -142,7 +142,7 @@
                             <template v-if="vehicle.status__c != 'Purchase'">
                                 <div class="row actions">
                                     <div class="col">
-                                        <button>Save Design</button>
+                                        <button v-on:click="save">Save Design</button>
                                     </div>
                                     <div class="col">
                                         <button class="primary" v-on:click="purchase">Purchase</button>
@@ -157,6 +157,8 @@
         <div>
             <% include ../partials/login.ejs %>
         </div>
+
+        <div id="toast">Vehicle preferences saved.</div>
     </div>
 
     <div>
