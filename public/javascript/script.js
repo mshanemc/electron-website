@@ -1,4 +1,4 @@
-Number.prototype.formatMoney = function(c, d, t) {
+Number.prototype.formatMoney = function (c, d, t) {
     var n = this,
         c = isNaN((c = Math.abs(c))) ? 2 : c,
         d = d == undefined ? "." : d,
@@ -12,9 +12,9 @@ Number.prototype.formatMoney = function(c, d, t) {
         i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) +
         (c
             ? d +
-              Math.abs(n - i)
-                  .toFixed(c)
-                  .slice(2)
+            Math.abs(n - i)
+                .toFixed(c)
+                .slice(2)
             : "")
     );
 };
@@ -40,40 +40,40 @@ new Vue({
         monthNames: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
     },
     methods: {
-        changeModel: function(newModel) {
+        changeModel: function (newModel) {
             var newVehicle = Object.assign({}, this.vehicle);
             newVehicle.model__c = newModel;
             this.swapCar(newVehicle, () => {
                 this.updateVehicle();
             });
         },
-        changeUsername: function(event) {
+        changeUsername: function (event) {
             // Password doesn't matter. Just a tiny hack to set the password to something.
             this.password = this.username;
         },
-        updatePrice: function(event) {
+        updatePrice: function (event) {
             $.post(
                 "/api/pricequote",
                 serialize(this.vehicle),
                 (data, textStatus) => {
-                    this.vehicle.price__c = data.price;
+                    this.vehicle.price__c = data;
                 },
                 "json"
             );
         },
-        login: function() {
+        login: function () {
             this.username = $("#username").val();
             this.getAccount();
         },
-        logout: function() {
+        logout: function () {
             Cookies.set("username", "");
             window.location.href = "/";
         },
-        purchase: function() {
+        purchase: function () {
             this.vehicle.status__c = "Purchase";
             this.updateVehicle();
         },
-        getAccount: function() {
+        getAccount: function () {
             $.getJSON("/api/account?username=" + this.username, data => {
                 if (data) {
                     this.greeting = "Hi, " + data.firstname;
@@ -84,14 +84,14 @@ new Vue({
                 }
             });
         },
-        getVehicle: function() {
+        getVehicle: function () {
             $.getJSON("/api/vehicle?username=" + this.username, data => {
                 if (data) {
                     this.swapCar(data);
                 }
             });
         },
-        updateVehicle: function() {
+        updateVehicle: function () {
             $.post(
                 "/api/vehicle",
                 serialize(this.vehicle),
@@ -100,8 +100,9 @@ new Vue({
                 },
                 "json"
             );
+            this.updatePrice();
         },
-        swapCar: function(vehicle, callback) {
+        swapCar: function (vehicle, callback) {
             setTimeout(() => {
                 $("#car-wrapper").css("animation-name", "driveOff");
                 setTimeout(() => {
@@ -114,7 +115,7 @@ new Vue({
             }, 500);
         }
     },
-    created: function() {
+    created: function () {
         if (this.vehicle.status__c == "Ownership" && window.location.pathname != "/dashboard") {
             window.location.href = "/dashboard";
         }
