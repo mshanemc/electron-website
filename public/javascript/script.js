@@ -124,8 +124,9 @@ new Vue({
         if (this.vehicle.status__c == "Ownership" && window.location.pathname != "/dashboard") {
             window.location.href = "/dashboard";
         }
-        if (parseInt(this.vehicle.price__c) == 0) {
+        if (parseInt(this.vehicle.price__c) == 0 || this.vehicle.price__c == null) {
             this.updatePrice();
+            this.updateVehicle();
         }
     }
 });

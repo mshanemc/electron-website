@@ -103,8 +103,10 @@ exports.getAccountAndVehicleByUsername = function (username, callbackFunction) {
 
         exports.getVehicleByUsername(username, vehicle => {
             if (vehicle) {
+                console.log('Found vehicle');
                 data.vehicle = vehicle;
             } else {
+                console.log('No vehicle found');
                 data.vehicle.account__c = data.account.sfid;
             }
             callbackFunction(data);

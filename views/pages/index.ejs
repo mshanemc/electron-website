@@ -13,13 +13,12 @@
         </div>
 
         <div class="main text-center">
-            <h1>And go.</h1>
+            <h1>Get set.</h1>
             <div id="car-wrapper">
                 <img id="car-photo" v-bind:src="'/images/' + vehicle.model__c.toLowerCase() + '.png'" v-bind:style="{'-webkit-filter': 'hue-rotate(' + vehicle.paint__c + 'deg)'}" />
             </div>
-            <div class="actions">
-                <button>Test Drive</button>
-                <button onclick="location.href='/customize'" class="primary">Customize</button>
+            <div class="message">
+                2020 PREORDERS NOW AVAILABLE!
             </div>
         </div>
         <div>
