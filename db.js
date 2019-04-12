@@ -24,7 +24,7 @@ function getDBconfigFromString(connectionString) {
     return config;
 }
 
-exports.getPrice = function(vehicle) {
+exports.getPrice = function (vehicle) {
     var price = 0;
 
     switch (vehicle.model__c) {
@@ -78,11 +78,11 @@ exports.getPrice = function(vehicle) {
     return price;
 };
 
-exports.getAccountAndVehicleByUsername = function(username, callbackFunction) {
+exports.getAccountAndVehicleByUsername = function (username, callbackFunction) {
     var data = {
         account: {},
         vehicle: {
-            model__c: "Flint",
+            model__c: "Flash",
             battery__c: "75 kWh",
             paint__c: "0",
             status__c: "Evaluation"
@@ -113,8 +113,8 @@ exports.getAccountAndVehicleByUsername = function(username, callbackFunction) {
     });
 };
 
-exports.getAccountByUsername = function(username, callbackFunction) {
-    pool.connect(function(err, client, done) {
+exports.getAccountByUsername = function (username, callbackFunction) {
+    pool.connect(function (err, client, done) {
         if (err) {
             console.log("Can not connect to the DB" + err);
             callbackFunction(null);
@@ -128,7 +128,7 @@ exports.getAccountByUsername = function(username, callbackFunction) {
                 "INNER JOIN salesforce.Contact ON (salesforce.Contact.AccountId = salesforce.Account.sfid) WHERE username__c = $1",
             values: [username]
         };
-        client.query(query, function(err, result) {
+        client.query(query, function (err, result) {
             done();
             if (err) {
                 console.log(err);
@@ -145,8 +145,8 @@ exports.getAccountByUsername = function(username, callbackFunction) {
     });
 };
 
-exports.getVehicleByUsername = function(username, callbackFunction) {
-    pool.connect(function(err, client, done) {
+exports.getVehicleByUsername = function (username, callbackFunction) {
+    pool.connect(function (err, client, done) {
         if (err) {
             console.log("Can not connect to the DB" + err);
             callbackFunction(null);
@@ -160,7 +160,7 @@ exports.getVehicleByUsername = function(username, callbackFunction) {
                 "INNER JOIN salesforce.Account ON (salesforce.Vehicle__c.Account__c = salesforce.Account.sfid) WHERE salesforce.Account.username__c = $1",
             values: [username]
         };
-        client.query(query, function(err, result) {
+        client.query(query, function (err, result) {
             done();
             if (err) {
                 console.log(err);
@@ -177,9 +177,9 @@ exports.getVehicleByUsername = function(username, callbackFunction) {
     });
 };
 
-exports.updateVehicle = function(vehicle, callbackFunction) {
+exports.updateVehicle = function (vehicle, callbackFunction) {
     vehicle.price__c = exports.getPrice(vehicle);
-    pool.connect(function(err, client, done) {
+    pool.connect(function (err, client, done) {
         if (err) {
             console.log("Can not connect to the DB" + err);
             callbackFunction(null);
@@ -233,7 +233,7 @@ exports.updateVehicle = function(vehicle, callbackFunction) {
                 ]
             };
         }
-        client.query(query, function(err, result) {
+        client.query(query, function (err, result) {
             done();
             if (err) {
                 console.log(err);
