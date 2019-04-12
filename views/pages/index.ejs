@@ -11,21 +11,20 @@
         <div>
             <% include ../partials/nav.ejs %>
         </div>
-
         <div class="main text-center">
-            <h1>Get set.</h1>
+            <h1>And go.</h1>
             <div id="car-wrapper">
                 <img id="car-photo" v-bind:src="'/images/' + vehicle.model__c.toLowerCase() + '.png'" v-bind:style="{'-webkit-filter': 'hue-rotate(' + vehicle.paint__c + 'deg)'}" />
             </div>
-            <div class="message">
-                2020 PREORDERS NOW AVAILABLE!
+            <div class="actions">
+                <button>Test Drive</button>
+                <button onclick="location.href='/customize'" class="primary">Customize</button>
             </div>
         </div>
         <div>
             <% include ../partials/login.ejs %>
         </div>
     </div>
-
     <div>
         <% include ../partials/footer.ejs %>
     </div>
