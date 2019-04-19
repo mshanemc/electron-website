@@ -12,7 +12,7 @@ This website showcases how Heroku Connect can be used to easily integrate a publ
 
 4. Click **Heroku Connect** (this will open in a new tab).
 
-5. Click **Setup** Connection.
+5. Click **Setup Connection**.
 
 6. Click **Next**.
 
