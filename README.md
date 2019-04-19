@@ -4,7 +4,7 @@ This website showcases how Heroku Connect can be used to easily integrate a publ
 
 ## Setup Instructions
 
-1. [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/gabesumner/electron-website/tree/packaging) 
+1. Click this button -> [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/gabesumner/electron-website/tree/packaging) 
 
 2. Login to Heroku (if you don't already have a Heroku account then sign up for one), then click the **Deploy App** button.
 
