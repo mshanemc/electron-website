@@ -26,35 +26,6 @@
       }
     },
     {
-      "object_name": "Contact",
-      "config": {
-        "access": "read_only",
-        "sf_notify_enabled": true,
-        "sf_polling_seconds": 600,
-        "sf_max_daily_api_calls": 30000,
-        "fields": {
-          "LastName": {},
-          "AccountId": {},
-          "Name": {},
-          "IsDeleted": {},
-          "SystemModstamp": {},
-          "CreatedDate": {},
-          "Id": {},
-          "FirstName": {},
-          "Email": {}
-        },
-        "indexes": {
-          "SystemModstamp": {
-            "unique": false
-          },
-          "Id": {
-            "unique": true
-          }
-        },
-        "applied_at": "2018-05-09T23:15:13.901676Z"
-      }
-    },
-    {
       "object_name": "Vehicle__c",
       "config": {
         "indexes": {
