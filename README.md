@@ -16,7 +16,7 @@ This website showcases how Heroku Connect can be used to easily integrate a publ
 
 6. Click **Next**.
 
-7. *IMPORTANT:* Change the **Environment** to **Sandbox** and click **Authorize**.
+7. Change the **Environment** to **Sandbox** and click **Authorize**.
 
 8. Login using your Electron Motors Salesforce demo org credentials.
 
@@ -26,7 +26,7 @@ This website showcases how Heroku Connect can be used to easily integrate a publ
 
 11. Click **Import**.
 
-12. Click **Choose File**, upload this file, and click **Upload**.
+12. Click **Choose File**, upload [this file](https://raw.githubusercontent.com/gabesumner/electron-website/master/heroku-connect-mappings.json), and click **Upload**.
 
 13. Return to your new Heroku app tab (from step 4).
 
