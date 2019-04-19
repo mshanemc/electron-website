@@ -1,39 +1,47 @@
-# node-js-getting-started
+# Electron Motors Website
 
-A barebones Node.js app using [Express 4](http://expressjs.com/).
+This website showcases how Heroku Connect can be used to easily integrate a public-facing website with Salesforce.
 
-This application supports the [Getting Started with Node on Heroku](https://devcenter.heroku.com/articles/getting-started-with-nodejs) article - check it out.
+## Setup Instructions
 
-## Running Locally
+1. Click this button -> [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/gabesumner/electron-website) 
 
-Make sure you have [Node.js](http://nodejs.org/) and the [Heroku CLI](https://cli.heroku.com/) installed.
+2. Login to Heroku (if you don't already have a Heroku account then sign up for one), then click the **Deploy App** button.
 
-```sh
-$ git clone git@github.com:heroku/node-js-getting-started.git # or clone your own fork
-$ cd node-js-getting-started
-$ npm install
-$ npm start
-```
+3. After the app is successfully deployed, click the **Manage App** button.
 
-Your app should now be running on [localhost:5000](http://localhost:5000/).
+4. Click **Heroku Connect** (this will open in a new tab).
 
-## Deploying to Heroku
+5. Click **Setup Connection**.
 
-```
-$ heroku create
-$ git push heroku master
-$ heroku open
-```
-or
+6. Click **Next**.
 
-[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+7. *IMPORTANT:* Change the **Environment** to **Sandbox** and click **Authorize**.
 
-## Documentation
+8. Login using your Electron Motors Salesforce demo org credentials.
 
-For more information about using Node.js on Heroku, see these Dev Center articles:
+9. Click **Allow**.
 
-- [Getting Started with Node.js on Heroku](https://devcenter.heroku.com/articles/getting-started-with-nodejs)
-- [Heroku Node.js Support](https://devcenter.heroku.com/articles/nodejs-support)
-- [Node.js on Heroku](https://devcenter.heroku.com/categories/nodejs)
-- [Best Practices for Node.js Development](https://devcenter.heroku.com/articles/node-best-practices)
-- [Using WebSockets on Heroku with Node.js](https://devcenter.heroku.com/articles/node-websockets)
+10. Click **Settings** and **Import/Export Configuration**.
+
+11. Click **Import**.
+
+12. Click **Choose File**, upload this file, and click **Upload**.
+
+13. Return to your new Heroku app tab (from step 4).
+
+14. Click **Open app**.
+
+15. Inside Salesforce, click **Accounts**, click any Account, and copy & paste the **Username**.
+
+16. Click **Login** on the Electron Motors website and paste the username from step 15 (password doesn't matter).
+
+17. Click **Login**. 
+
+18. Click **Customize** and customize the vehicle and purchase. 
+
+19. Return to the Account in Salesforce, reload the record, click into the Vehicle. Changes will be synced.
+
+20. Strut confidently around the room.
+
+

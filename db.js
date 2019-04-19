@@ -99,6 +99,9 @@ exports.getAccountAndVehicleByUsername = function (username, callbackFunction) {
             callbackFunction(data);
             return;
         }
+        var names = account.name.split(" ");
+        account.firstname = names[0];
+        account.lastname = names[1];
         data.account = account;
 
         exports.getVehicleByUsername(username, vehicle => {
@@ -125,9 +128,9 @@ exports.getAccountByUsername = function (username, callbackFunction) {
         var query = {
             name: "fetch-account",
             text:
-                "SELECT salesforce.Account.sfid, salesforce.Account.Name, salesforce.Contact.FirstName, salesforce.Contact.LastName, salesforce.Contact.Email, salesforce.Account.Username__c " +
+                "SELECT salesforce.Account.sfid, salesforce.Account.Name, salesforce.Account.Username__c " +
                 "FROM salesforce.Account " +
-                "INNER JOIN salesforce.Contact ON (salesforce.Contact.AccountId = salesforce.Account.sfid) WHERE username__c = $1",
+                "WHERE username__c = $1",
             values: [username]
         };
         client.query(query, function (err, result) {

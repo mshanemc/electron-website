@@ -1,0 +1,89 @@
+{
+  "mappings": [
+    {
+      "object_name": "Account",
+      "config": {
+        "access": "read_only",
+        "sf_notify_enabled": true,
+        "sf_polling_seconds": 600,
+        "sf_max_daily_api_calls": 30000,
+        "fields": {
+          "CreatedDate": {},
+          "Id": {},
+          "IsDeleted": {},
+          "Name": {},
+          "SystemModstamp": {},
+          "Username__c": {}
+        },
+        "indexes": {
+          "Id": {
+            "unique": true
+          },
+          "SystemModstamp": {
+            "unique": false
+          }
+        }
+      }
+    },
+    {
+      "object_name": "Vehicle__c",
+      "config": {
+        "indexes": {
+          "SystemModstamp": {
+            "unique": false
+          },
+          "Id": {
+            "unique": true
+          },
+          "Web_ID__c": {
+            "unique": true
+          }
+        },
+        "sf_max_daily_api_calls": 30000,
+        "access": "read_write",
+        "upsert_field": "Web_ID__c",
+        "applied_at": "2019-04-10T01:04:41.179500Z",
+        "sf_polling_seconds": 600,
+        "sf_notify_enabled": true,
+        "fields": {
+          "Spoiler__c": {},
+          "Sunroof__c": {},
+          "Paint__c": {},
+          "Year__c": {},
+          "Hydraulic_System__c": {},
+          "Wheels__c": {},
+          "Name": {},
+          "Billing_Status__c": {},
+          "Self_Driving__c": {},
+          "IsDeleted": {},
+          "SystemModstamp": {},
+          "Rear_Seats__c": {},
+          "Status__c": {},
+          "Interior__c": {},
+          "CreatedDate": {},
+          "Account__c": {},
+          "Battery__c": {},
+          "Model__c": {},
+          "Autopilot__c": {},
+          "Price__c": {},
+          "Id": {},
+          "Web_ID__c": {}
+        }
+      }
+    }
+  ],
+  "connection": {
+    "app_name": "electron-motors-site",
+    "organization_id": "00Df4000003AHjVEAW",
+    "exported_at": "2019-04-19T18:22:30.283804+00:00",
+    "features": {
+      "poll_db_no_merge": true,
+      "poll_external_ids": false,
+      "rest_count_only": false
+    },
+    "api_version": "42.0",
+    "name": "electron-motors-site:DATABASE_URL:salesforce",
+    "logplex_log_enabled": false
+  },
+  "version": 1
+}
