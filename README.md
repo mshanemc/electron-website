@@ -18,7 +18,7 @@ This website showcases how Heroku Connect can be used to easily integrate a publ
 
 7. Change the **Environment** to **Sandbox** and click **Authorize**.
 
-8. Login using your Electron Motors Salesforce demo org credentials.
+8. Login using your Electron Motors Salesforce demo org credentials - [instructions](https://salesforce.quip.com/8HZrAw1eImuD).
 
 9. Click **Allow**.
 
