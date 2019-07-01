@@ -26,6 +26,80 @@
       }
     },
     {
+      "object_name": "Contact",
+      "config": {
+        "access": "read_only",
+        "sf_notify_enabled": true,
+        "sf_polling_seconds": 600,
+        "sf_max_daily_api_calls": 30000,
+        "fields": {
+          "LastName": {},
+          "AccountId": {},
+          "Name": {},
+          "Username__c": {},
+          "IsDeleted": {},
+          "SystemModstamp": {},
+          "CreatedDate": {},
+          "Id": {},
+          "FirstName": {}
+        },
+        "indexes": {
+          "SystemModstamp": {
+            "unique": false
+          },
+          "Id": {
+            "unique": true
+          }
+        }
+      }
+    },
+    {
+      "object_name": "Loan__c",
+      "config": {
+        "indexes": {
+          "SystemModstamp": {
+            "unique": false
+          },
+          "Id": {
+            "unique": true
+          },
+          "Web_ID__c": {
+            "unique": true
+          }
+        },
+        "sf_max_daily_api_calls": 30000,
+        "access": "read_write",
+        "upsert_field": "Web_ID__c",
+        "applied_at": "2019-06-24T03:27:14.728468Z",
+        "sf_polling_seconds": 600,
+        "sf_notify_enabled": true,
+        "fields": {
+          "LastName__c": {},
+          "Customer__c": {},
+          "FirstName__c": {},
+          "Employer__c": {},
+          "Name": {},
+          "IsDeleted": {},
+          "SystemModstamp": {},
+          "Cosigner_FirstName__c": {},
+          "Status__c": {},
+          "CreatedDate": {},
+          "Account__c": {},
+          "Vehicle__c": {},
+          "Interest__c": {},
+          "Cosigner_LastName__c": {},
+          "Model__c": {},
+          "Price__c": {},
+          "Id": {},
+          "Terms__c": {},
+          "Web_ID__c": {},
+          "Cosigner_SSN__c": {},
+          "Downpayment__c": {},
+          "Cosigner_Employer__c": {}
+        }
+      }
+    },
+    {
       "object_name": "Vehicle__c",
       "config": {
         "indexes": {
@@ -42,7 +116,7 @@
         "sf_max_daily_api_calls": 30000,
         "access": "read_write",
         "upsert_field": "Web_ID__c",
-        "applied_at": "2019-04-10T01:04:41.179500Z",
+        "applied_at": "2019-06-23T22:07:31.518235Z",
         "sf_polling_seconds": 600,
         "sf_notify_enabled": true,
         "fields": {
@@ -56,7 +130,9 @@
           "Billing_Status__c": {},
           "Self_Driving__c": {},
           "IsDeleted": {},
+          "Owner__c": {},
           "SystemModstamp": {},
+          "Payment_Type__c": {},
           "Rear_Seats__c": {},
           "Status__c": {},
           "Interior__c": {},
@@ -73,15 +149,15 @@
     }
   ],
   "connection": {
-    "app_name": "electron-motors-site",
-    "organization_id": "00Df4000003AHjVEAW",
-    "exported_at": "2019-04-19T18:22:30.283804+00:00",
+    "app_name": "electron-motors-www",
+    "organization_id": "00D1100000BwfFMEAZ",
+    "exported_at": "2019-07-01T23:09:07.895718+00:00",
     "features": {
       "poll_db_no_merge": true,
       "poll_external_ids": false,
       "rest_count_only": false
     },
-    "api_version": "42.0",
+    "api_version": "46.0",
     "name": "electron-motors-site:DATABASE_URL:salesforce",
     "logplex_log_enabled": false
   },

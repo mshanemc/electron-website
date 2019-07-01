@@ -85,7 +85,8 @@ exports.getAccountAndVehicleByUsername = function (username, callbackFunction) {
             model__c: "Flash",
             battery__c: "75 kWh",
             paint__c: "0",
-            status__c: "Evaluation"
+            status__c: "Evaluation",
+            payment_type__c: "Cash"
         }
     };
 
@@ -94,14 +95,13 @@ exports.getAccountAndVehicleByUsername = function (username, callbackFunction) {
         return;
     }
 
-    exports.getAccountByUsername(username, account => {
+    //exports.getAccountByUsername(username, account => {
+    exports.getContactByUsername(username, account => {
+        console.log('Returned getAccountAndVehicleByUsername: ' + JSON.stringify(account));
         if (!account) {
             callbackFunction(data);
             return;
         }
-        var names = account.name.split(" ");
-        account.firstname = names[0];
-        account.lastname = names[1];
         data.account = account;
 
         exports.getVehicleByUsername(username, vehicle => {
@@ -110,7 +110,8 @@ exports.getAccountAndVehicleByUsername = function (username, callbackFunction) {
                 data.vehicle = vehicle;
             } else {
                 console.log('No vehicle found');
-                data.vehicle.account__c = data.account.sfid;
+                data.vehicle.account__c = data.account.accountid;
+                data.vehicle.owner__c = data.account.sfid;
             }
             callbackFunction(data);
             return;
@@ -150,6 +151,39 @@ exports.getAccountByUsername = function (username, callbackFunction) {
     });
 };
 
+exports.getContactByUsername = function (username, callbackFunction) {
+    pool.connect(function (err, client, done) {
+        if (err) {
+            console.log("Can not connect to the DB" + err);
+            callbackFunction(null);
+            return;
+        }
+        var query = {
+            name: "fetch-contact",
+            text:
+                "SELECT salesforce.Contact.AccountId, salesforce.Contact.sfid, salesforce.Account.Name, salesforce.Contact.FirstName, salesforce.Contact.LastName, salesforce.Account.Username__c " +
+                "FROM salesforce.Contact " +
+                "INNER JOIN salesforce.Account ON (salesforce.Contact.AccountId = salesforce.Account.sfid) WHERE salesforce.Contact.username__c = $1",
+            values: [username]
+        };
+        client.query(query, function (err, result) {
+            done();
+            if (err) {
+                console.log(err);
+                callbackFunction();
+                return;
+            }
+            if (result.rowCount > 0) {
+                console.log('Returned getContactByUsername: ' + JSON.stringify(result.rows[0]));
+                callbackFunction(result.rows[0]);
+            } else {
+                callbackFunction();
+            }
+            return;
+        });
+    });
+};
+
 exports.getVehicleByUsername = function (username, callbackFunction) {
     pool.connect(function (err, client, done) {
         if (err) {
@@ -160,7 +194,7 @@ exports.getVehicleByUsername = function (username, callbackFunction) {
         var query = {
             name: "fetch-vehicle",
             text:
-                "SELECT salesforce.Vehicle__c.sfid, salesforce.Vehicle__c.web_id__c, salesforce.Vehicle__c.Account__c, salesforce.Vehicle__c.Model__c, salesforce.Vehicle__c.Paint__c, salesforce.Vehicle__c.Autopilot__c, salesforce.Vehicle__c.Battery__c, salesforce.Vehicle__c.Rear_Seats__c, salesforce.Vehicle__c.Self_Driving__c, salesforce.Vehicle__c.Spoiler__c, salesforce.Vehicle__c.Hydraulic_System__c, salesforce.Vehicle__c.Sunroof__c, salesforce.Vehicle__c.Price__c, salesforce.Vehicle__c.Status__c, Salesforce.Vehicle__c.Year__c " +
+                "SELECT salesforce.Vehicle__c.sfid, salesforce.Vehicle__c.web_id__c, salesforce.Vehicle__c.Account__c, salesforce.Vehicle__c.Model__c, salesforce.Vehicle__c.Paint__c, salesforce.Vehicle__c.Autopilot__c, salesforce.Vehicle__c.Battery__c, salesforce.Vehicle__c.Rear_Seats__c, salesforce.Vehicle__c.Self_Driving__c, salesforce.Vehicle__c.Spoiler__c, salesforce.Vehicle__c.Hydraulic_System__c, salesforce.Vehicle__c.Sunroof__c, salesforce.Vehicle__c.Price__c, salesforce.Vehicle__c.Status__c, Salesforce.Vehicle__c.Year__c, Salesforce.Vehicle__c.Payment_Type__c " +
                 "FROM salesforce.Vehicle__c " +
                 "INNER JOIN salesforce.Account ON (salesforce.Vehicle__c.Account__c = salesforce.Account.sfid) WHERE salesforce.Account.username__c = $1",
             values: [username]
@@ -184,6 +218,10 @@ exports.getVehicleByUsername = function (username, callbackFunction) {
 
 exports.updateVehicle = function (vehicle, callbackFunction) {
     vehicle.price__c = exports.getPrice(vehicle);
+    if (vehicle.account__c == null && vehicle.owner__c == null) {
+        console.log('Error, no updateVehicle -- Account ID and Owner ID not found!');
+        return;
+    }
     pool.connect(function (err, client, done) {
         if (err) {
             console.log("Can not connect to the DB" + err);
@@ -192,11 +230,11 @@ exports.updateVehicle = function (vehicle, callbackFunction) {
         }
         var query;
         if (vehicle.sfid || vehicle.web_id__c) {
-            console.log("Updating " + vehicle.sfid);
+            console.log("Updating " + vehicle.sfid + ":" + vehicle.web_id__c);
             query = {
                 name: "update-vehicle",
                 text:
-                    "UPDATE salesforce.Vehicle__c SET Model__c = $1, Paint__c = $2, Autopilot__c = $3, Battery__c = $4, Rear_Seats__c = $5, Self_Driving__c = $6, Spoiler__c = $7, Hydraulic_System__c = $8, Sunroof__c = $9, Price__c = $10, Status__c = $11 WHERE (sfid = $12 OR web_id__c = $13)",
+                    "UPDATE salesforce.Vehicle__c SET Model__c = $1, Paint__c = $2, Autopilot__c = $3, Battery__c = $4, Rear_Seats__c = $5, Self_Driving__c = $6, Spoiler__c = $7, Hydraulic_System__c = $8, Sunroof__c = $9, Price__c = $10, Status__c = $11, Payment_Type__c = $14 WHERE (sfid = $12 OR web_id__c = $13)",
                 values: [
                     vehicle.model__c,
                     vehicle.paint__c,
@@ -210,16 +248,17 @@ exports.updateVehicle = function (vehicle, callbackFunction) {
                     vehicle.price__c,
                     vehicle.status__c,
                     vehicle.sfid,
-                    vehicle.web_id__c
+                    vehicle.web_id__c,
+                    vehicle.payment_type__c
                 ]
             };
         } else {
             vehicle.web_id__c = uuidv1();
-            console.log("Inserting " + vehicle.web_id__c);
+            console.log("Inserting Vehicle " + vehicle.web_id__c + " for " + vehicle.account__c + ":" + vehicle.owner__c);
             query = {
                 name: "insert-vehicle",
                 text:
-                    "INSERT into salesforce.Vehicle__c(Web_ID__c, Account__c, Model__c, Year__c, Paint__c, Autopilot__c, Battery__c, Rear_Seats__c, Self_Driving__c, Spoiler__c, Hydraulic_System__c, Sunroof__c, Price__c, Status__c) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)",
+                    "INSERT into salesforce.Vehicle__c(Web_ID__c, Account__c, Model__c, Year__c, Paint__c, Autopilot__c, Battery__c, Rear_Seats__c, Self_Driving__c, Spoiler__c, Hydraulic_System__c, Sunroof__c, Price__c, Status__c, Payment_Type__c, Owner__c) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)",
                 values: [
                     vehicle.web_id__c,
                     vehicle.account__c,
@@ -234,7 +273,9 @@ exports.updateVehicle = function (vehicle, callbackFunction) {
                     vehicle.hydraulic_system__c,
                     vehicle.sunroof__c,
                     vehicle.price__c,
-                    vehicle.status__c
+                    vehicle.status__c,
+                    vehicle.payment_type__c,
+                    vehicle.owner__c
                 ]
             };
         }
@@ -249,3 +290,41 @@ exports.updateVehicle = function (vehicle, callbackFunction) {
         });
     });
 };
+
+exports.createLoan = function(loan, callbackFunction) {
+    console.log("Inserting Loan");
+    pool.connect(function (err, client, done) {
+        if (err) {
+            console.log("Can not connect to the DB" + err);
+            callbackFunction(null);
+            return;
+        }
+        query = {
+            name: "insert-loan",
+            text:
+                "INSERT into salesforce.Loan__c(Customer__c, Status__c, Model__c, Price__c, Terms__c, Interest__c, Downpayment__c, Account__c, FirstName__c, LastName__c, Vehicle__c) SELECT $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, sfid FROM salesforce.vehicle__c WHERE web_id__c = $11",
+            values: [
+                loan.customer__c,
+                loan.status__c,
+                loan.model__c,
+                loan.price__c,
+                loan.terms__c,
+                loan.interest__c,
+                loan.downpayment__c,
+                loan.account__c,
+                loan.firstname__c,
+                loan.lastname__c,
+                loan.web_id__c
+            ]
+        };
+        client.query(query, function (err, result) {
+            done();
+            if (err) {
+                console.log(err);
+                callbackFunction();
+                return;
+            }
+            callbackFunction(loan);
+        });
+    });
+}

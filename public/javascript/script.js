@@ -37,6 +37,7 @@ new Vue({
         validLogin: false,
         account: account,
         vehicle: vehicle,
+        loan: loan,
         monthNames: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
     },
     methods: {
@@ -73,6 +74,11 @@ new Vue({
             this.vehicle.status__c = "Purchase";
             this.updateVehicle();
         },
+        apply: function () {
+            this.vehicle.status__c = "Purchase";
+            this.createLoan();
+            this.updateVehicle();
+        },
         getAccount: function () {
             $.getJSON("/api/account?username=" + this.username, data => {
                 if (data) {
@@ -97,6 +103,7 @@ new Vue({
                 serialize(this.vehicle),
                 (data, textStatus) => {
                     this.vehicle = data;
+                    console.log('Updated vehicle: ' + JSON.stringify(data))
                 },
                 "json"
             );
@@ -118,9 +125,31 @@ new Vue({
             var x = document.getElementById("toast");
             x.className = "show";
             setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
+        },
+        createLoan: function () {
+            $.post(
+                "/api/loan",
+                serialize({
+                    customer__c: this.account.sfid,
+                    status__c: 'Pending',
+                    model__c: this.vehicle.model__c,
+                    price__c: this.vehicle.price__c,
+                    terms__c: this.loan.terms__c,
+                    interest__c: this.loan.interest__c,
+                    downpayment__c: this.loan.downpayment__c,
+                    account__c: this.account.accountid,
+                    web_id__c: this.vehicle.web_id__c,
+                    firstname__c: this.account.firstname,
+                    lastname__c: this.account.lastname
+                }),
+                (data, textStatus) => {
+                },
+                "json"
+            );
         }
     },
     created: function () {
+        console.log('created');
         if (this.vehicle.status__c == "Ownership" && window.location.pathname != "/dashboard") {
             window.location.href = "/dashboard";
         }

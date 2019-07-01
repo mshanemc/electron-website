@@ -61,7 +61,8 @@ express()
     })
     .get("/api/account", function (req, res) {
         var username = req.query.username;
-        db.getAccountByUsername(username, function (account) {
+        //db.getAccountByUsername(username, function (account) {
+        db.getContactByUsername(username, function (account) {
             res.setHeader("Content-Type", "application/json");
             res.send(JSON.stringify(account, null, 3));
         });
@@ -86,4 +87,12 @@ express()
         res.setHeader("Content-Type", "application/json");
         res.send(JSON.stringify(data, null, 3));
     })
+    .post("/api/loan", function (req, res) {
+        console.log('Creating loan...');
+        var loan = req.body;
+        db.createLoan(loan, function (newLoan) {
+            res.setHeader("Content-Type", "application/json");
+            res.send(JSON.stringify(newLoan, null, 3));
+        });
+    })    
     .listen(PORT, () => console.log(`Listening on ${PORT}`));
