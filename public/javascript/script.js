@@ -37,7 +37,7 @@ new Vue({
         validLogin: false,
         account: account,
         vehicle: vehicle,
-        loan: loan,
+        loan: null,
         monthNames: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
     },
     methods: {

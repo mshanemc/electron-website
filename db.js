@@ -163,10 +163,13 @@ exports.getContactByUsername = function (username, callbackFunction) {
             text:
                 "SELECT salesforce.Contact.AccountId, salesforce.Contact.sfid, salesforce.Account.Name, salesforce.Contact.FirstName, salesforce.Contact.LastName, salesforce.Account.Username__c " +
                 "FROM salesforce.Contact " +
-                "INNER JOIN salesforce.Account ON (salesforce.Contact.AccountId = salesforce.Account.sfid) WHERE salesforce.Contact.username__c = $1",
+                "INNER JOIN salesforce.Account ON (salesforce.Contact.AccountId = salesforce.Account.sfid) WHERE salesforce.Contact.Username__c = $1",
             values: [username]
         };
         client.query(query, function (err, result) {
+            console.log('Query: ' + JSON.stringify(query) + "\n\n");
+            console.log('Result: ' + JSON.stringify(result) + "\n\n");
+            console.log('Error: ' + JSON.stringify(err) + "\n\n");
             done();
             if (err) {
                 console.log(err);
@@ -219,7 +222,7 @@ exports.getVehicleByUsername = function (username, callbackFunction) {
 exports.updateVehicle = function (vehicle, callbackFunction) {
     vehicle.price__c = exports.getPrice(vehicle);
     if (vehicle.account__c == null && vehicle.owner__c == null) {
-        console.log('Error, no updateVehicle -- Account ID and Owner ID not found!');
+        console.log('updateVehicle: Error, Account ID and Owner ID not found!');
         return;
     }
     pool.connect(function (err, client, done) {
