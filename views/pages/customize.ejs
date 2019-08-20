@@ -131,6 +131,7 @@
                             <div id="purchase" class="tabcontent">
                                 <h2>Purchase Complete!</h2>
                                 <h3>Congratulations on your new {{ vehicle.model__c }} vehicle.</h3>
+                                <button v-on:click="vehicle.status__c = 'Evaluation'; updateVehicle();" class="modify">Modify</button>
                             </div>
                         </template>
 
