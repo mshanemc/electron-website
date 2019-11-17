@@ -178,6 +178,10 @@ body.home {
             animation-duration: 1s;
         }
 
+        p {
+            font-size: 1.3rem;
+        }
+
         .customization {
             padding-top: 1rem;
             text-transform: uppercase;
@@ -307,6 +311,7 @@ body.custom {
                     h3 {
                         font-size: 1.2rem;
                         line-height: 1.4;
+                        padding-bottom: 1.2rem;
                     }
                 }
 
@@ -328,14 +333,15 @@ body.custom {
                     margin: 0;
                     width: 100%;
                     display: block;
+                    outline: none;
                 }
 
                 .selected {
                     background-color: inherit;
                 }
 
-                button {
-                    outline: none;
+                .modify {
+                    margin-top: 130px;
                 }
 
                 .tabcontent {
@@ -568,4 +574,4 @@ body.dashboard {
   @keyframes fadeout {
     from {top: 30px; opacity: 1;}
     to {top: 0; opacity: 0;}
-  }    
+  }
